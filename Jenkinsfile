@@ -15,7 +15,7 @@ pipeline {
         stage('GIT') {
             steps {
                 // Get some code from a GitHub repository
-                git url :  "${params.Git_url}",
+                git url :  "${params.Git_URL}",
                     branch: "${params.Branch}"
         }
         }
