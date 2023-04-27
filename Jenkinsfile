@@ -3,13 +3,17 @@ pipeline {
     parameters {
         string(name : 'Git_URL', description: 'The git repository to use')
         string(name: 'Branch', defaultValue: 'main', description: 'Branch to use')
-        choice(name: 'Java_Version', choice:['17','11'], description: 'Java version to use')
+        choice(name: 'Java_Version', choice:['17','11','20','21','22'], description: 'Java version to use')
 
     }
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "${params.Java_Version}"
+        maven "M3"
+        //Java version choice
+        sh "sed -i 's/<maven\.compiler\.target>'*'<\/maven\.compiler\.target>/<maven.compiler.target>"${params.Java_Version}"<\/maven.compiler.target>/g' pom.xml"
+        sh "sed -i 's/<maven\.compiler\.source>'*'<\/maven\.compiler\.source>/<maven.compiler.source>"${params.Java_Version}"<\/maven.compiler.source>/g' pom.xml"
+
     }
 
     stages {
