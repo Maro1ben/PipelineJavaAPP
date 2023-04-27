@@ -13,6 +13,7 @@ pipeline {
                 git url :  'https://github.com/matthcol/movieapp_jdbc.git',
                     branch: 'main'
         }
+        }
         stage('COMPILE'){
             steps{
                 sh "mvn clean compile"
@@ -41,5 +42,4 @@ pipeline {
 
         }
     }
-}
 }
