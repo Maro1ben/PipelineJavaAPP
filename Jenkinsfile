@@ -3,7 +3,7 @@ pipeline {
     parameters {
         string(name : 'Git_URL', description: 'The git repository to use')
         string(name: 'Branch', defaultValue: 'main', description: 'Branch to use')
-        choice(name: 'Java_Version', choice:['17','11','20','21','22'], description: 'Java version to use')
+        choice(name: 'Java_Version', choices:['17','11','20','21','22'], description: 'Java version to use')
 
     }
 
