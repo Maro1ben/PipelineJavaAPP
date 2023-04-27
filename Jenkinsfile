@@ -10,8 +10,8 @@ pipeline {
         stage('GIT') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-            }
+                git url :  'https://github.com/matthcol/movieapp_jdbc.git',
+                    branch: 'main'
         }
         stage('COMPILE'){
             steps{
