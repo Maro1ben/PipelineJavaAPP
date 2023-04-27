@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    parameters {
+        string(name : 'Git_URL', description: 'The git repository to use')
+        string(name: 'Branch', defaultValue: 'main', description: 'Branch to use')
+
+    }
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
@@ -10,8 +15,8 @@ pipeline {
         stage('GIT') {
             steps {
                 // Get some code from a GitHub repository
-                git url :  'https://github.com/matthcol/movieapp_jdbc.git',
-                    branch: 'main'
+                git url :  "${params.Git_url}",
+                    branch: "${params.Branch}"
         }
         }
         stage('COMPILE'){
