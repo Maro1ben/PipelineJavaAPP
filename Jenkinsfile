@@ -10,9 +10,7 @@ pipeline {
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
-        //Java version choice
-        sh "sed -i 's/<maven\.compiler\.target>'*'<\/maven\.compiler\.target>/<maven.compiler.target>"${params.Java_Version}"<\/maven.compiler.target>/g' pom.xml"
-        sh "sed -i 's/<maven\.compiler\.source>'*'<\/maven\.compiler\.source>/<maven.compiler.source>"${params.Java_Version}"<\/maven.compiler.source>/g' pom.xml"
+        jdk "jdk-${params.Java_Version}"
 
     }
 
@@ -22,6 +20,7 @@ pipeline {
                 // Get some code from a GitHub repository
                 git url :  "${params.Git_URL}",
                     branch: "${params.Branch}"
+                    sh "sed -i -e 's@<maven.compiler.target>.*</maven.compiler.target>@<maven.compiler.target>${params.Java_Version}<\/maven.compiler.target>@' -e 's@<maven.compiler.source>.*</maven.compiler.source>@<maven.compiler.source>${params.Java_Version}<\/maven.compiler.source>@' pom.xml"
         }
         }
         stage('COMPILE'){
