@@ -3,12 +3,13 @@ pipeline {
     parameters {
         string(name : 'Git_URL', description: 'The git repository to use')
         string(name: 'Branch', defaultValue: 'main', description: 'Branch to use')
+        choice(name: 'Java_Version', choice:['17','11'], description: 'Java version to use')
 
     }
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
+        maven "${params.Java_Version}"
     }
 
     stages {
